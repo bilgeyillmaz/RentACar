@@ -4,7 +4,7 @@
 
 namespace RentACar.Migrations
 {
-    public partial class FirstMigration : Migration
+    public partial class FirstInitialize : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -69,6 +69,18 @@ namespace RentACar.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Roles",
+                columns: table => new
+                {
+                    RoleID = table.Column<byte>(type: "tinyint", nullable: false),
+                    RoleName = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Roles", x => x.RoleID);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Cars",
                 columns: table => new
                 {
@@ -116,6 +128,30 @@ namespace RentACar.Migrations
                         column: x => x.GearTypeID,
                         principalTable: "GearTypes",
                         principalColumn: "GearTypeID",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Users",
+                columns: table => new
+                {
+                    UserID = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Email = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
+                    Password = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: false),
+                    FullName = table.Column<string>(type: "nvarchar(40)", maxLength: 40, nullable: false),
+                    Surname = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: false),
+                    MobileNO = table.Column<string>(type: "nvarchar(15)", maxLength: 15, nullable: false),
+                    RoleID = table.Column<byte>(type: "tinyint", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Users", x => x.UserID);
+                    table.ForeignKey(
+                        name: "FK_Users_Roles_RoleID",
+                        column: x => x.RoleID,
+                        principalTable: "Roles",
+                        principalColumn: "RoleID",
                         onDelete: ReferentialAction.Cascade);
                 });
 
@@ -781,12 +817,20 @@ namespace RentACar.Migrations
                 name: "IX_Cars_GearTypeID",
                 table: "Cars",
                 column: "GearTypeID");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Users_RoleID",
+                table: "Users",
+                column: "RoleID");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
                 name: "Cars");
+
+            migrationBuilder.DropTable(
+                name: "Users");
 
             migrationBuilder.DropTable(
                 name: "BodyTypes");
@@ -802,6 +846,9 @@ namespace RentACar.Migrations
 
             migrationBuilder.DropTable(
                 name: "GearTypes");
+
+            migrationBuilder.DropTable(
+                name: "Roles");
         }
     }
 }

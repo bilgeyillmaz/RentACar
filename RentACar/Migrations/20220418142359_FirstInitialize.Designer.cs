@@ -11,8 +11,8 @@ using RentACar.Data;
 namespace RentACar.Migrations
 {
     [DbContext(typeof(RentACarDBContext))]
-    [Migration("20220414150911_FirstMigration")]
-    partial class FirstMigration
+    [Migration("20220418142359_FirstInitialize")]
+    partial class FirstInitialize
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -6741,6 +6741,64 @@ namespace RentACar.Migrations
                         });
                 });
 
+            modelBuilder.Entity("RentACar.Models.Role", b =>
+                {
+                    b.Property<byte>("RoleID")
+                        .HasColumnType("tinyint");
+
+                    b.Property<string>("RoleName")
+                        .IsRequired()
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
+
+                    b.HasKey("RoleID");
+
+                    b.ToTable("Roles");
+                });
+
+            modelBuilder.Entity("RentACar.Models.User", b =>
+                {
+                    b.Property<int>("UserID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("UserID"), 1L, 1);
+
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.Property<string>("FullName")
+                        .IsRequired()
+                        .HasMaxLength(40)
+                        .HasColumnType("nvarchar(40)");
+
+                    b.Property<string>("MobileNO")
+                        .IsRequired()
+                        .HasMaxLength(15)
+                        .HasColumnType("nvarchar(15)");
+
+                    b.Property<string>("Password")
+                        .IsRequired()
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
+
+                    b.Property<byte>("RoleID")
+                        .HasColumnType("tinyint");
+
+                    b.Property<string>("Surname")
+                        .IsRequired()
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
+
+                    b.HasKey("UserID");
+
+                    b.HasIndex("RoleID");
+
+                    b.ToTable("Users");
+                });
+
             modelBuilder.Entity("RentACar.Models.Car", b =>
                 {
                     b.HasOne("RentACar.Models.BodyType", "BodyType")
@@ -6782,6 +6840,17 @@ namespace RentACar.Migrations
                     b.Navigation("FuelType");
 
                     b.Navigation("GearType");
+                });
+
+            modelBuilder.Entity("RentACar.Models.User", b =>
+                {
+                    b.HasOne("RentACar.Models.Role", "Role")
+                        .WithMany()
+                        .HasForeignKey("RoleID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Role");
                 });
 #pragma warning restore 612, 618
         }

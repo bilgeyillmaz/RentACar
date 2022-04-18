@@ -12,6 +12,8 @@ namespace RentACar.Data
         public DbSet<Brand> Brands { get; set; }
         public DbSet<CarColor> CarColors { get; set; }
         public DbSet<BodyType> BodyTypes { get; set; } //seeddata 
+        public DbSet<User> Users { get; set; }
+        public DbSet<Role> Roles { get; set; }  
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
