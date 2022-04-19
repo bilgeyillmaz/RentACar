@@ -6752,6 +6752,28 @@ namespace RentACar.Migrations
                     b.HasKey("RoleID");
 
                     b.ToTable("Roles");
+
+                    b.HasData(
+                        new
+                        {
+                            RoleID = (byte)1,
+                            RoleName = "Pasif Kullanıcı"
+                        },
+                        new
+                        {
+                            RoleID = (byte)2,
+                            RoleName = "Aktif Kullanıcı"
+                        },
+                        new
+                        {
+                            RoleID = (byte)3,
+                            RoleName = "Admin"
+                        },
+                        new
+                        {
+                            RoleID = (byte)4,
+                            RoleName = "Supervisor"
+                        });
                 });
 
             modelBuilder.Entity("RentACar.Models.User", b =>

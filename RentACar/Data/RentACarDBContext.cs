@@ -15,8 +15,16 @@ namespace RentACar.Data
         public DbSet<User> Users { get; set; }
         public DbSet<Role> Roles { get; set; }  
 
+
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            modelBuilder.Entity<Role>().HasData(
+              new Role { RoleID = 1, RoleName = "Pasif Kullanıcı" },
+              new Role { RoleID = 2, RoleName = "Aktif Kullanıcı" },
+              new Role { RoleID = 3, RoleName = "Admin" },
+              new Role { RoleID = 4, RoleName = "Supervisor" }
+          );
             modelBuilder.Entity<GearType>().HasData(
                 new GearType { GearTypeID = 1, GearTypeName = "Otomatik" },
                 new GearType { GearTypeID = 2, GearTypeName = "Manuel" },

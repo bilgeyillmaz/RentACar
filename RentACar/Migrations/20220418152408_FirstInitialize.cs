@@ -212,6 +212,17 @@ namespace RentACar.Migrations
                 });
 
             migrationBuilder.InsertData(
+                table: "Roles",
+                columns: new[] { "RoleID", "RoleName" },
+                values: new object[,]
+                {
+                    { (byte)1, "Pasif Kullanıcı" },
+                    { (byte)2, "Aktif Kullanıcı" },
+                    { (byte)3, "Admin" },
+                    { (byte)4, "Supervisor" }
+                });
+
+            migrationBuilder.InsertData(
                 table: "Cars",
                 columns: new[] { "CarID", "BodyTypeID", "BrandID", "CarColorID", "CarModel", "FuelTypeID", "GearTypeID", "LuggageVolume", "ModelYear", "SeatNumber" },
                 values: new object[,]

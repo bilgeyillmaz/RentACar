@@ -38,8 +38,9 @@ namespace RentACar.Controllers
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Kayit([Bind("UserID", "Email", "Password", "PasswordRepeat", "FullName", "Surname", "MobileNO")] User user)
+        public async Task<IActionResult> Kayit([Bind("UserID", "Email", "Password", "PasswordRepeat", "FullName", "Surname", "MobileNO", "RoleID")] User user)
         {
+            user.RoleID = 1;
             if (ModelState.IsValid)
             {
                 await _rentACarDBContext.AddAsync(user);

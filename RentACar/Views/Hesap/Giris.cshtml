@@ -30,8 +30,12 @@
                     <div class="col-sm-12">
 
                         <div class="wrapper-page">
-
+                               
                             <div class="m-t-40 card-box">
+                                @using (Html.BeginForm("Index", "Home"))
+                        {
+                            <button class="btn btn-dark">GERİ</button>
+                        }
                                 <div class="text-center">
                                     <h2 class="text-uppercase m-t-0 m-b-30">
                                         <a href="index.html" class="text-success">

@@ -32,8 +32,11 @@
                     <div class="col-sm-12">
 
                         <div class="wrapper-page">
-
                             <div class="m-t-40 card-box">
+                                        @using (Html.BeginForm("Giris", "Hesap"))
+                        {
+                            <button class="btn btn-dark">GERİ</button>
+                        }
                                 <div class="text-center">
                                     <h2 class="text-uppercase m-t-0 m-b-30">
                                         <a href="index.html" class="text-success">
@@ -44,44 +47,55 @@
                                 </div>
                                 <div class="account-content">
                                     <form asp-controller="Hesap" asp-action="Kayit" method="post" class="form-horizontal">
-                                        <div asp-validation-summary="All" class="text-danger"></div>
+                                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                                          <div class="form-group m-b-20">
                                             <div class="col-12">
-                                                <label for="FullName">İsim ve Varsa İkinci İsim</label>
-                                                <input class="form-control" type="text"  id="FullName" name="FullName" required="" placeholder="Ali" value="@Model.FullName">
+                                                <label for="FullName">İsim</label>
+                                                <input class="form-control" type="text"  id="FullName" name="FullName"  placeholder="Ali" value="@Model.FullName">
+                                                <span asp-validation-for="@Model.FullName" class="text-danger"></span>
                                             </div>
+
                                         </div>
                                          <div class="form-group m-b-20">
                                             <div class="col-12">
                                                 <label for="Surname">Soyisim</label>
-                                                <input class="form-control" name="Surname" type="text" required="" id="Surname" placeholder="Veli" value="@Model.Surname">
+                                                <input class="form-control" name="Surname" type="text" id="Surname" placeholder="Veli" value="@Model.Surname">
+                                                <span asp-validation-for="@Model.Surname" class="text-danger"></span>
                                             </div>
                                         </div>
 
                                         <div class="form-group m-b-20">
                                             <div class="col-12">
                                                 <label for="Email">E-posta Adresi</label>
-                                                <input class="form-control" type="email" name="Email" id="Email" required="" placeholder="ali@hotmail.com" value="@Model.Email">
+                                                <input class="form-control" type="email" name="Email" id="Email"  placeholder="ali@hotmail.com" value="@Model.Email">
+                                                <span asp-validation-for="@Model.Email" class="text-danger"></span>
+
                                             </div>
                                         </div>
 
                                         <div class="form-group m-b-20">
                                             <div class="col-12">
                                                 <label for="Password">Şifre</label>
-                                                <input class="form-control" name="Password" type="password" required="" id="Password" placeholder="Şifre">
+                                                <input class="form-control" name="Password" type="password"  id="Password" placeholder="Şifre">
+                                                <span asp-validation-for="@Model.Password" class="text-danger"></span>
+
                                             </div>
                                         </div>
                                         <div class="form-group m-b-20">
                                             <div class="col-12">
                                                 <label for="PasswordRepeat">Şifre Tekrarı</label>
-                                                <input class="form-control" name="PasswordRepeat" type="password" required="" id="PasswordRepeat" placeholder="Şifre">
+                                                <input class="form-control" name="PasswordRepeat" type="password"  id="PasswordRepeat" placeholder="Şifre">
+                                                <span asp-validation-for="@Model.PasswordRepeat" class="text-danger"></span>
+
                                             </div>
                                         </div>
 
                                         <div class="form-group m-b-20">
                                             <div class="col-12">
                                                 <label for="MobileNO">Telefon No</label>
-                                                <input class="form-control"  type="text" name="MobileNO" required="" id="MobileNO" placeholder="Telefon No" value="@Model.MobileNO">
+                                                <input class="form-control"  type="text" name="MobileNO"  id="MobileNO" placeholder="Telefon No" value="@Model.MobileNO">
+                                                <span asp-validation-for="@Model.MobileNO" class="text-danger"></span>
+
                                             </div>
                                         </div>
 
