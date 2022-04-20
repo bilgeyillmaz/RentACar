@@ -53,11 +53,25 @@ namespace RentACar.Controllers
                 await _rentACarDBContext.AddAsync(user);
                 await _rentACarDBContext.SaveChangesAsync();
                 Helpers.EPostaIslemleri.AktivasyonMailiGonder(user.Email);
-                return RedirectToAction("Giris", "Hesap");
+                return RedirectToAction("AktivasyonBilgilendirmesi", "Hesap");
+               
             }
             return View(user); //bir girdisi hatalıysa sayfayı tamamen boş döndürmüyor, girdiği bilgilerle döndürüyor.
         }
         public IActionResult Aktivasyon(string kkk)
+        {
+            string eposta = Helpers.Sifreleme.SifreyiCoz(kkk);
+            var user = _rentACarDBContext.Users.FirstOrDefault(m => m.Email == eposta);
+            if(user != null)
+            {
+                user.RoleID = 2;
+                _rentACarDBContext.Users.Update(user);
+                _rentACarDBContext.SaveChanges();
+                return View();
+            }
+            return View();  
+        }
+        public IActionResult AktivasyonBilgilendirmesi()
         {
             return View();
         }
