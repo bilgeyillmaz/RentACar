@@ -4,7 +4,7 @@
 
 namespace RentACar.Migrations
 {
-    public partial class FirstInitialize : Migration
+    public partial class FirstMigration : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -802,6 +802,16 @@ namespace RentACar.Migrations
                     { 496, (byte)4, (byte)2, (byte)1, "4-Series, M4", (byte)3, (byte)4, (short)1850, (short)2017, (byte)5 },
                     { 497, (byte)4, (byte)1, (byte)4, "Sephia", (byte)4, (byte)3, (short)2950, (short)2021, (byte)7 },
                     { 498, (byte)4, (byte)3, (byte)5, "Sedan de Ville", (byte)1, (byte)3, (short)2200, (short)2015, (byte)5 }
+                });
+
+            migrationBuilder.InsertData(
+                table: "Users",
+                columns: new[] { "UserID", "Email", "FullName", "MobileNO", "Password", "RoleID", "Surname" },
+                values: new object[,]
+                {
+                    { 1, "admin@test.com", "Administrator", "5554443322", "Test123!", (byte)3, "Administrator" },
+                    { 2, "aktif@test.com", "Aktif", "5554443333", "Test123!", (byte)2, "Aktif" },
+                    { 3, "pasif@test.com", "Pasif", "5554443344", "Test123!", (byte)1, "Pasif" }
                 });
 
             migrationBuilder.CreateIndex(

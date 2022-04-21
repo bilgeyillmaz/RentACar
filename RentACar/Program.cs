@@ -1,4 +1,5 @@
 
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.EntityFrameworkCore;
 using RentACar.Data;
 
@@ -12,6 +13,26 @@ builder.Services.AddDbContext<RentACarDBContext>(options =>
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+builder.Services.Configure<Microsoft.AspNetCore.Mvc.CookieTempDataProviderOptions>(options =>
+{
+    options.Cookie.IsEssential = true;
+});
+
+
+builder.Services.Configure<CookiePolicyOptions>(options =>
+{
+    // This lambda determines whether user consent for non-essential cookies is needed for a given request.
+    options.CheckConsentNeeded = context => true;
+    options.MinimumSameSitePolicy = SameSiteMode.None;
+});
+
+builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme).AddCookie(options =>
+{
+    options.LoginPath = "/Hesap/Giris"; //baþarýlýysa
+    options.AccessDeniedPath = "/Hesap/Giris";  //eðer adam baþarýlý olamadýysa buraya gitsin
+    options.LogoutPath = "/Hesap/Giris"; //çýkýþ yaptýðýnda gideceði kýsým 
+
+});
 
 var app = builder.Build();
 
@@ -23,8 +44,14 @@ if (!app.Environment.IsDevelopment())
     app.UseHsts();
 }
 
+app.UseStatusCodePagesWithReExecute("/ErrorPage/Error1", "?code={0}");
+
 app.UseHttpsRedirection();
 app.UseStaticFiles();
+
+app.UseCookiePolicy();
+app.UseAuthentication();
+
 
 app.UseRouting();
 

@@ -1,4 +1,5 @@
-﻿<!DOCTYPE html>
+﻿@model RentACar.ViewModel.UserViewModel
+<!DOCTYPE html>
 <html>
     <head>
         <meta charset="utf-8" />
@@ -45,20 +46,22 @@
                                     <!--<h4 class="text-uppercase font-bold m-b-0">Sign In</h4>-->
                                 </div>
                                 <div class="account-content">
-                                    <form class="form-horizontal" action="#">
-
+                                    <form class="form-horizontal" asp-controller="Hesap" asp-action="Giris" method="post">
+                                        <span class="alert-danger" m-b-5>@Html.ValidationMessage("Hata2")</span>
                                         <div class="form-group m-b-20">
                                             <div class="col-12">
-                                                <label for="emailaddress">E-posta Adresi</label>
-                                                <input class="form-control" type="email" id="emailaddress" required="" placeholder="bilge@xyz.com">
+                                                <label for="Email">E-posta Adresi</label>
+                                                <input class="form-control" type="email" id="Email"  name="Email" required="" value="@Model.Email" placeholder="bilge@xyz.com">
+                                                <span asp-validation-for="@Model.Email" class="text-danger"></span>
                                             </div>
                                         </div>
 
                                         <div class="form-group m-b-20">
                                             <div class="col-12">
                                                 <a asp-controller="Hesap" asp-action="Sifresifirla" class="text-muted pull-right font-14">Şifrenizi mi unuttunuz?</a>
-                                                <label for="password">Şifre</label>
-                                                <input class="form-control" type="password" required="" id="password" placeholder="Şifrenizi giriniz">
+                                                <label for="Password">Şifre</label>
+                                                <input class="form-control" type="password" required="" id="Password" name="Password" placeholder="Şifrenizi giriniz">
+                                                <span asp-validation-for="@Model.Password" class="text-danger"></span>
                                             </div>
                                         </div>
 

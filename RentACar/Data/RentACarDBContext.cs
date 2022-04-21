@@ -19,6 +19,11 @@ namespace RentACar.Data
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            modelBuilder.Entity<User>().HasData(
+             new User { UserID=1, Email="admin@test.com", FullName="Administrator", Surname="Administrator", MobileNO="5554443322", Password="Test123!", PasswordRepeat="Test123!",RoleID=3},
+             new User { UserID = 2, Email = "aktif@test.com", FullName = "Aktif", Surname = "Aktif", MobileNO = "5554443333", Password = "Test123!", PasswordRepeat = "Test123!", RoleID = 2 },
+              new User { UserID = 3, Email = "pasif@test.com", FullName = "Pasif", Surname = "Pasif", MobileNO = "5554443344", Password = "Test123!", PasswordRepeat = "Test123!", RoleID = 1 }
+         );
             modelBuilder.Entity<Role>().HasData(
               new Role { RoleID = 1, RoleName = "Pasif Kullanıcı" },
               new Role { RoleID = 2, RoleName = "Aktif Kullanıcı" },

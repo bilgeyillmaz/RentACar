@@ -11,8 +11,8 @@ using RentACar.Data;
 namespace RentACar.Migrations
 {
     [DbContext(typeof(RentACarDBContext))]
-    [Migration("20220418152408_FirstInitialize")]
-    partial class FirstInitialize
+    [Migration("20220421151356_FirstMigration")]
+    partial class FirstMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -6819,6 +6819,38 @@ namespace RentACar.Migrations
                     b.HasIndex("RoleID");
 
                     b.ToTable("Users");
+
+                    b.HasData(
+                        new
+                        {
+                            UserID = 1,
+                            Email = "admin@test.com",
+                            FullName = "Administrator",
+                            MobileNO = "5554443322",
+                            Password = "Test123!",
+                            RoleID = (byte)3,
+                            Surname = "Administrator"
+                        },
+                        new
+                        {
+                            UserID = 2,
+                            Email = "aktif@test.com",
+                            FullName = "Aktif",
+                            MobileNO = "5554443333",
+                            Password = "Test123!",
+                            RoleID = (byte)2,
+                            Surname = "Aktif"
+                        },
+                        new
+                        {
+                            UserID = 3,
+                            Email = "pasif@test.com",
+                            FullName = "Pasif",
+                            MobileNO = "5554443344",
+                            Password = "Test123!",
+                            RoleID = (byte)1,
+                            Surname = "Pasif"
+                        });
                 });
 
             modelBuilder.Entity("RentACar.Models.Car", b =>
